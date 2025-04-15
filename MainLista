@@ -1,0 +1,179 @@
+package TrabalhoJava;
+
+import java.util.Scanner;
+
+
+public interface MainLista {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ListaSimplesTrabalho lista = null;
+
+        int opcao;
+
+        do {
+            System.out.println("\n--- MENU LISTA SIMPLES ---");
+            System.out.println("1. Criar nova lista");
+            System.out.println("2. Inserir elemento");
+            System.out.println("3. Inserir sequência de elementos");
+            System.out.println("4. Remover elemento");
+            System.out.println("5. Remover por índice");
+            System.out.println("6. Remover sequência de elementos");
+            System.out.println("7. Exibir lista");
+            System.out.println("8. Ordenar crescente");
+            System.out.println("9. Ordenar decrescente");
+            System.out.println("10. Buscar elemento");
+            System.out.println("11. Buscar por índice");
+            System.out.println("12. Editar elemento");
+            System.out.println("13. Verificar se está cheia");
+            System.out.println("14. Verificar se está vazia");
+            System.out.println("15. Dobrar capacidade");
+            System.out.println("16. Limpar lista");
+            System.out.println("17. Obter primeiro elemento");
+            System.out.println("18. Obter último elemento");
+            System.out.println("19. Mostrar quantidade de elementos");
+            System.out.println("0. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Informe o tamanho da lista: ");
+                    int tamanho = scanner.nextInt();
+                    lista = new ListaSimplesTrabalho(tamanho);
+                    break;
+                case 2:
+                    if (lista != null) {
+                        System.out.print("Informe o elemento (número): ");
+                        int elemento = scanner.nextInt();
+                        lista.inserirElemento(elemento);
+                    } else {
+                        System.out.println("Crie a lista primeiro!");
+                    }
+                    break;
+                case 3:
+                    if (lista != null) {
+                        System.out.print("Quantos elementos deseja inserir? ");
+                        int qtd = scanner.nextInt();
+                        Object[] sequencia = new Object[qtd];
+                        for (int i = 0; i < qtd; i++) {
+                            System.out.print("Elemento " + (i + 1) + ": ");
+                            sequencia[i] = scanner.nextInt();
+                        }
+                        lista.inserirSequencia(sequencia);
+                    }
+                    break;
+                case 4:
+                    if (lista != null) {
+                        lista.removerElemento();
+                    }
+                    break;
+                case 5:
+                    if (lista != null) {
+                        System.out.print("Informe o índice: ");
+                        int indice = scanner.nextInt();
+                        lista.removerIndice(indice);
+                    }
+                    break;
+                case 6:
+                    if (lista != null) {
+                        System.out.print("Quantos elementos deseja remover? ");
+                        int qtd = scanner.nextInt();
+                        Object[] remover = new Object[qtd];
+                        for (int i = 0; i < qtd; i++) {
+                            System.out.print("Elemento " + (i + 1) + ": ");
+                            remover[i] = scanner.nextInt();
+                        }
+                        lista.removerSequencia(remover);
+                    }
+                    break;
+                case 7:
+                    if (lista != null) {
+                        lista.exibir();
+                    }
+                    break;
+                case 8:
+                    if (lista != null) {
+                        lista.ordenarCrescente();
+                        System.out.println("Lista ordenada em ordem crescente.");
+                    }
+                    break;
+                case 9:
+                    if (lista != null) {
+                        lista.ordenarDecrescente();
+                        System.out.println("Lista ordenada em ordem decrescente.");
+                    }
+                    break;
+                case 10:
+                    if (lista != null) {
+                        System.out.print("Elemento a buscar: ");
+                        int buscar = scanner.nextInt();
+                        lista.buscaElemento(buscar);
+                    }
+                    break;
+                case 11:
+                    if (lista != null) {
+                        System.out.print("Informe o índice: ");
+                        int idx = scanner.nextInt();
+                        lista.buscarElementoIndice(idx);
+                    }
+                    break;
+                case 12:
+                    if (lista != null) {
+                        System.out.print("Elemento antigo: ");
+                        int antigo = scanner.nextInt();
+                        System.out.print("Novo elemento: ");
+                        int novo = scanner.nextInt();
+                        lista.editarElemento(antigo, novo);
+                    }
+                    break;
+                case 13:
+                    if (lista != null) {
+                        lista.estaCheia();
+                    }
+                    break;
+                case 14:
+                    if (lista != null) {
+                        boolean vazia = lista.estaVazia();
+                        System.out.println("a lista nao esta vazia " );
+                    }
+                    break;
+                case 15:
+                    if (lista != null) {
+                        lista.dobrarCapacidade();
+                    }
+                    break;
+                case 16:
+                    if (lista != null) {
+                        lista.limpar();
+                        System.out.println("Lista limpa.");
+                    }
+                    break;
+                case 17:
+                    if (lista != null) {
+                        Object primeiro = lista.obterPrimeiroElemento();
+                        if (primeiro != null) System.out.println("Primeiro elemento: " + primeiro);
+                    }
+                    break;
+                case 18:
+                    if (lista != null) {
+                        Object ultimo = lista.obterUltimoElemento();
+                        if (ultimo != null) System.out.println("Último elemento: " + ultimo);
+                    }
+                    break;
+                case 19:
+                    if (lista != null) {
+                        lista.quantidadeElementos();
+                    }
+                    break;
+                case 0:
+                    System.out.println("Encerrando programa.");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 0);
+
+        scanner.close();
+    }
+}
