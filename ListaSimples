@@ -1,0 +1,224 @@
+package TrabalhoJava;
+
+public class ListaSimplesTrabalho {
+
+        private Integer tamanho;
+        private Object lista[];
+
+        public ListaSimplesTrabalho(int tamanhoDaLista) {
+            this.tamanho = tamanhoDaLista;
+            lista = new Object[tamanhoDaLista];
+            System.out.println("A lista foi criada com sucesso! Seu tamanho é igual a:" + tamanhoDaLista);
+        }
+        public boolean posicaoEstaVazia(int posicao){
+            if(this.lista[posicao]==null){
+                return true;
+            }
+            return false;
+        }
+        public void inserirElemento(Object elemento){
+            for(int i =0;i<this.tamanho;i++){
+                if(posicaoEstaVazia(i)){
+                    this.lista[i]=elemento;
+                    break;
+                }
+            }
+        }
+        public boolean verificarIntervalo(int indice){
+            if(indice>=0 && indice<=this.tamanho-1){
+                return true;
+            }else{
+                System.out.println("O indice informado está fora do intervalo da lista.");
+                return false;
+            }
+        }
+        public void inserirElementoIndice(Object elemento, int indice){
+            if(verificarIntervalo(indice)){
+                if(posicaoEstaVazia(indice)){
+                    this.lista[indice]=elemento;
+                }else{
+                    System.out.println("Posicao esta ocupada");
+                }
+            }
+        }
+        public boolean removerElemento() {
+        if (!estaVazia()) {
+            for (int i = 0; i < this.tamanho; i++) {
+                if (this.lista[i] != null) {
+                    this.lista[i] = null;
+                    return true;
+        }
+            }
+        }
+        return false;
+    }
+    public void exibir() {
+        for (int i = 0; i < this.tamanho; i++) {
+            System.out.println(this.lista[i]);
+        }
+    }
+    public boolean estaVazia() {
+        if(this.lista[0] == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void removerIndice(int indice) {
+        if(verificarIntervalo(indice)) {
+            for (int i = indice; i < this.tamanho - 1; i++) {
+                this.lista[i] = this.lista[i + 1];
+            }
+            this.lista[this.tamanho - 1] = null;
+        }
+    }
+    public boolean estaCheia() {
+        for (int i = 0; i < this.tamanho; i++) {
+            if(this.lista[i]==null){
+               System.out.println("A lista nao esta cheia");
+               return false;
+            }
+        }
+        System.out.println("A lista esta cheia");
+        return true;
+    }
+    public boolean buscaElemento(Object elemento) {
+        for (int i = 0; i < this.tamanho; i++) {
+            if(this.lista[i] == elemento) {
+                System.out.println("O elemento " + elemento + " existe na lista, no índice " + (i+1));
+                return true;
+            }
+        }
+        System.out.println("O elemento não foi encontrado!");
+        return false;
+    }
+    public Object buscarElementoIndice(int indice) {
+        if (verificarIntervalo(indice)) {
+            System.out.println("o elemento que esta neste indice é "+ this.lista[indice] );
+            return this.lista[indice];
+        } else {
+            System.out.println("Índice inválido!");
+            return null;
+        }
+    }
+    public void ordenarCrescente() {
+        if (estaVazia()) {
+            System.out.println("Não existem elementos para serem ordenados.");
+            return;
+        }
+        Object aux;
+        for (int h = 0; h < this.tamanho; h++) {
+            for (int i = 0; i < (this.tamanho - 1); i++) {
+                if (this.lista[i] != null && this.lista[i + 1] != null) {
+                    Integer atual = (Integer) this.lista[i];
+                    Integer proximo = (Integer) this.lista[i + 1];
+                    if (atual > proximo) {
+                        aux = this.lista[i];
+                        this.lista[i] = this.lista[i + 1];
+                        this.lista[i + 1] = aux;
+                    }
+                }
+            }
+        }
+    }
+    public void ordenarDecrescente(){
+        if (estaVazia()) {
+            System.out.println("Não existem elementos para serem ordenados.");
+            return;
+        }
+        Object aux;
+        for (int h = 0; h < this.tamanho; h++) {
+            for (int i = 0; i < (this.tamanho - 1); i++) {
+                if (this.lista[i] != null && this.lista[i + 1] != null) {
+                    Integer atual = (Integer) this.lista[i];
+                    Integer proximo = (Integer) this.lista[i + 1];
+                    if (atual < proximo) {
+                        aux = this.lista[i];
+                        this.lista[i] = this.lista[i + 1];
+                        this.lista[i + 1] = aux;
+                    }
+                }
+            }
+        }
+        }
+    public int quantidadeElementos() {
+        int cont = 0;
+        if(estaVazia()) {
+            System.out.println("Existem " + cont + " elementos na lista.");
+        } else {
+            for (int i = 0; i < tamanho; i++) {
+                if (this.lista[i] != null) {
+                    cont = cont + 1;
+                } else {
+                    break;
+                }
+            }
+            System.out.println("Existem " + cont + " elementos na lista.");
+        }
+        return cont;
+        }
+        public void limpar(){
+            if (!estaVazia()) {
+                for (int i = 0; i < this.tamanho; i++) {
+                    this.lista[i] = null;
+                }
+            }
+        }
+    public Object obterPrimeiroElemento() {
+        for (int i = 0; i < this.tamanho; i++) {
+            if (this.lista[i] != null) {
+                return this.lista[i];
+            }
+        }
+        System.out.println("A lista está vazia.");
+        return null;
+    }
+    public Object obterUltimoElemento() {
+        for (int i = this.tamanho - 1; i >= 0; i--) {
+            if (this.lista[i] != null) {
+                return this.lista[i];
+            }
+        }
+        System.out.println("A lista está vazia.");
+        return null;
+    }
+    public void editarElemento(Object elementoAntigo, Object elementoNovo) {
+        for (int i = 0; i < this.tamanho; i++) {
+            if (this.lista[i] != null && this.lista[i].equals(elementoAntigo)) {
+                this.lista[i] = elementoNovo;
+                System.out.println("Elemento editado " + i + ".");
+                return;
+            }
+        }
+        System.out.println("Nao existe");
+    }
+    public void dobrarCapacidade(){
+           int listaNova=this.tamanho*2;
+        Object[] novaLista = new Object[listaNova];
+        for (int i = 0; i < this.tamanho; i++) {
+            novaLista[i] = this.lista[i];
+        }
+        this.lista = novaLista;
+        this.tamanho = listaNova;
+        System.out.println("Novo tamanho da lista : " + this.tamanho);
+    }
+    public void inserirSequencia(Object[] elementos) {
+            for (Object elemento : elementos) {
+            inserirElemento(elemento);
+         }
+        }
+    public void removerSequencia(Object[] elementos) {
+        for (Object elemento : elementos) {
+            for (int i = 0; i < this.tamanho; i++) {
+                if (this.lista[i] != null && this.lista[i].equals(elemento)) {
+                    removerIndice(i);
+                    i--; // para verificar o novo elemento que foi movido para a posição i
+                }
+            }
+        }
+        System.out.println("Elementos removidos com sucesso.");
+    }
+
+
+
+}
